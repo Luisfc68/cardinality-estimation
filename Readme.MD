@@ -68,3 +68,12 @@ The command to run the estimators is:
 ```
 python main.py
 ```
+
+And an example of the estimators configuration:
+```
+estimators = [
+        Estimator("Hyper Log Log raw", create_hyper_log_log(number_of_observables=1024, use_correction=False)),
+        Estimator("Hyper Log Log with corrections", create_hyper_log_log(number_of_observables=1024, use_correction=True)),
+        Estimator("Recordinality", create_recordinality(k=512)),
+    ]
+```

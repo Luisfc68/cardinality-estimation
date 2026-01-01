@@ -34,7 +34,7 @@ if __name__ == '__main__':
     estimators = [
         Estimator("Hyper Log Log raw", create_hyper_log_log(number_of_observables=HLL_OBSERVABLES, use_correction=False)),
         Estimator("Hyper Log Log with corrections", create_hyper_log_log(number_of_observables=HLL_OBSERVABLES, use_correction=True)),
-        Estimator("Recordinality", create_recordinality(RECORDINALITY_K)),
+        Estimator("Recordinality", create_recordinality(k=RECORDINALITY_K)),
     ]
     for dataset_name in dataset_names:
         dataset_path = path.join(dataset_dir, dataset_name)
