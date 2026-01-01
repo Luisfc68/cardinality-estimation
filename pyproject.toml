@@ -1,0 +1,8 @@
+[project]
+name = "ra-assignment-3"
+version = "1.0.0"
+requires-python = ">=3.14"
+dependencies = [
+  "randomhash>=0.6.0",
+  "numpy>=2.4.0"
+]
