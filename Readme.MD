@@ -13,6 +13,7 @@ any case, the requirements are the following:
 The following estimators are included:
 * Hyper log log (with and without corrections)
 * Recordinality
+* Probabilistic counting with stochastic average
 
 The common steps to run any of the three scenarios are the following:
 1. Clone the project: `https://github.com/Luisfc68/cardinality-estimation.git`

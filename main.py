@@ -1,13 +1,15 @@
 from os import path
 from common import Estimator, EstimatorResult
 from hyper_log_log import create_hyper_log_log
+from pcsa import create_probabilistic_counting_stochastic_average
 from recordinality import create_recordinality
 import csv
 
-ITERATIONS = 5
+ITERATIONS = 100
 HLL_OBSERVABLES = 4096
 RECORDINALITY_K = 4096
-VERBOSE = True
+PCSA_OBSERVABLES = 2048 # importante comentar que n >> m sino no estima bien
+VERBOSE = False
 DATASET_DIR = "./datasets"
 DATASET_NAMES = ["dracula", "crusoe", "iliad", "synthetic_1", "quijote"]
 RESULT_FILENAME = "estimations"
@@ -38,6 +40,7 @@ if __name__ == '__main__':
         Estimator("Hyper Log Log raw", create_hyper_log_log(number_of_observables=HLL_OBSERVABLES, use_correction=False)),
         Estimator("Hyper Log Log with corrections", create_hyper_log_log(number_of_observables=HLL_OBSERVABLES, use_correction=True)),
         Estimator("Recordinality", create_recordinality(k=RECORDINALITY_K)),
+        Estimator("PCSA", create_probabilistic_counting_stochastic_average(number_of_observables=PCSA_OBSERVABLES)),
     ]
     results = []
     for dataset_name in dataset_names:
