@@ -1,12 +1,14 @@
 from os import path
 from common import Estimator, EstimatorResult
 from hyper_log_log import create_hyper_log_log
+from kmv import create_k_minimum_values
 from pcsa import create_probabilistic_counting_stochastic_average
 from recordinality import create_recordinality
 import csv
 
 ITERATIONS = 100
 HLL_OBSERVABLES = 4096
+KMV_K = 4096
 RECORDINALITY_K = 4096
 PCSA_OBSERVABLES = 2048 # importante comentar que n >> m sino no estima bien
 VERBOSE = False
@@ -41,6 +43,7 @@ if __name__ == '__main__':
         Estimator("Hyper Log Log with corrections", create_hyper_log_log(number_of_observables=HLL_OBSERVABLES, use_correction=True)),
         Estimator("Recordinality", create_recordinality(k=RECORDINALITY_K)),
         Estimator("PCSA", create_probabilistic_counting_stochastic_average(number_of_observables=PCSA_OBSERVABLES)),
+        Estimator("KMV", create_k_minimum_values(k=KMV_K)),
     ]
     results = []
     for dataset_name in dataset_names:
