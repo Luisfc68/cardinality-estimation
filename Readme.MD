@@ -19,13 +19,13 @@ The following estimators are included:
 The common steps to run any of the three scenarios are the following:
 1. Clone the project: `https://github.com/Luisfc68/cardinality-estimation.git`
 2. Go inside the project: `cd cardinality-estimation`
-3. Install the project: `pip3 install -e .`
+3. Install the project: `python -m pip install -e .`
 
 ### Generating a vocabulary
 The purpose of this functionality is to generate the vocabulary that will be used as an input to generate the synthetic datastreams.
 The command to be executed is 
 ```
-python3 stream_generator.py --mode=vocabulary
+python src/cardinality_estimation/stream_generator.py --mode=vocabulary
 ```
 The `stream_generator.py` file is used for the generation of both the stream and the vocabulary so that's why we need to specify the mode.
 Inside the `stream_generator.py`, the following variables need to be modified as needed:
@@ -47,6 +47,10 @@ The following variables should be configured as needed in the `stream_generator.
 * `STREAM_FILE`: the output file to write the stream. Should be inside `STREAM_DIR`.
 * `STREAM_SIZE`: the size of the stream.
 * `ALPHA`: the Zipfian distribution exponent, which controls the skewness of the probability distribution.
+The command to generate the stream is:
+```
+python src/cardinality_estimation/stream_generator.py --mode=stream
+```
 
 ### Estimating set cardinality
 This is the main functionality of this project. It consists on estimating the cardinality of the requested datasets with all the
@@ -68,7 +72,7 @@ There are some other configurations at the beginning of the `main.py` file like 
 (the presented results will be the average of these iterations) or the particular configurations of each estimator.
 The command to run the estimators is:
 ```
-python main.py
+python src/cardinality_estimation/main.py
 ```
 
 And an example of the estimators configuration:
