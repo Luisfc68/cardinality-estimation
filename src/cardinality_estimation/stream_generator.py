@@ -4,8 +4,8 @@ from os import path
 from numpy.random import choice
 
 STREAM_DIR = "./synthetic_datasets"
-VOCABULARY_FILE = "vocabulary.txt"
-STREAM_FILE = "stream.txt"
+VOCABULARY_FILE = "synthetic.dat"
+STREAM_FILE = "synthetic.txt"
 VOCABULARY_SIZE = 20_408
 STREAM_SIZE = VOCABULARY_SIZE * 20
 ALPHA = 0.6

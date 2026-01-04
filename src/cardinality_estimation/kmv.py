@@ -6,7 +6,7 @@ from heapq import heappush, heappop
 from numpy import sqrt
 
 def expected_kmv_error(k: int):
-    return 1/sqrt(k)
+    return 1/sqrt(k) # extracted from https://link.springer.com/chapter/10.1007/3-540-45726-7_1
 
 def create_k_minimum_values(k: int, max_bits = 32):
     MAX_HASH = 2 ** max_bits - 1

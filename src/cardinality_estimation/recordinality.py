@@ -39,4 +39,4 @@ def create_recordinality(k: int):
     return recordinality_instance
 
 def expected_recordinality_error(real_length:int, k: int):
-    return sqrt((real_length/(k*e))**(1/k) - 1)
+    return sqrt((real_length/(k*e))**(1/k) - 1) # https://inria.hal.science/hal-01197221v1/document
