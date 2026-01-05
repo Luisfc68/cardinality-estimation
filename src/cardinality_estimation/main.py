@@ -9,11 +9,11 @@ import csv
 ITERATIONS = 100
 HLL_OBSERVABLES = 4096
 KMV_K = 4096
-RECORDINALITY_K = 4096
-PCSA_OBSERVABLES = 2048 # importante comentar que n >> m sino no estima bien
+RECORDINALITY_K = 2048
+PCSA_OBSERVABLES = 128 # importante comentar que n >> m sino no estima bien
 VERBOSE = False
 DATASET_DIR = "./datasets"
-DATASET_NAMES = ["dracula", "crusoe", "iliad", "synthetic_1", "quijote"]
+DATASET_NAMES = ["dracula", "crusoe", "iliad", "synthetic_1", "quijote", "test"]
 RESULT_FILENAME = "estimations"
 
 def replicate_experiment(value_stream, estimator_instances: list[Estimator], iterations, verbose=False):
@@ -62,14 +62,16 @@ if __name__ == '__main__':
         for experiment_result in experiment_results:
             print("{} result: {} ± {}".format(experiment_result.estimator_name, experiment_result.estimation, actual_result*experiment_result.expected_error))
             result[normalize_str(experiment_result.estimator_name) + "_estimation"] = experiment_result.estimation
-            result[normalize_str(experiment_result.estimator_name) + "_relative_error"] = experiment_result.expected_error
-            result[normalize_str(experiment_result.estimator_name) + "_standard_error"] = actual_result*experiment_result.expected_error
+            result[normalize_str(experiment_result.estimator_name) + "_theoretical_relative_error"] = experiment_result.expected_error
+            result[normalize_str(experiment_result.estimator_name) + "_theoretical_error"] = actual_result*experiment_result.expected_error
+            result[normalize_str(experiment_result.estimator_name) + "_standard_error"] = experiment_result.standard_error
         results.append(result)
     with open(RESULT_FILENAME+".csv", "w", newline="") as csvfile:
         fieldnames = ['dataset', 'actual_value']
         for estimator in estimators:
             fieldnames.append(normalize_str(estimator.name) + "_estimation")
-            fieldnames.append(normalize_str(estimator.name) + "_relative_error")
+            fieldnames.append(normalize_str(estimator.name) + "_theoretical_relative_error")
+            fieldnames.append(normalize_str(estimator.name) + "_theoretical_error")
             fieldnames.append(normalize_str(estimator.name) + "_standard_error")
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()

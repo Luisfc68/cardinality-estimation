@@ -7,8 +7,8 @@ from heapq import heappush, heappop
 
 def create_recordinality(k: int):
     MAX_HASH = 2**32 - 1
-    hash_family = randomhash.RandomHashFamily(count=1)  # recordinality only uses one hash function
     def recordinality_instance(stream: Iterable[Any]):
+        hash_family = randomhash.RandomHashFamily(count=1)  # recordinality only uses one hash function
         records = set()
         heap = []
         stream_size = 0
@@ -30,7 +30,10 @@ def create_recordinality(k: int):
                 records.add(element_hash)
                 heappush(heap, element_hash)
                 number_of_records += 1
-        estimation = (k * (1 + 1/k)**(number_of_records - k + 1)) - 1
+        if len(records) < k:
+            estimation = len(records)
+        else:
+            estimation = (k * (1 + 1/k)**(number_of_records - k + 1)) - 1
         return RunResult(
             {"records": records, "estimation": estimation},
             estimation,

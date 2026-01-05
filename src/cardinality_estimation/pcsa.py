@@ -26,11 +26,11 @@ def create_probabilistic_counting_stochastic_average(number_of_observables, hash
     if number_of_observables <= 0 or number_of_observables & (number_of_observables - 1) != 0:
         raise ValueError('Number of observables must be a power of 2')
     CORRECTION_CONSTANT = 0.77351
-    hash_family = randomhash.RandomHashFamily(count=1) # pcsa only uses one hash function
     prefix_size = int(log2(number_of_observables))
     element_size = hash_length - prefix_size
     mask = (2**hash_length - 1)
     def pcsa_instance(stream: Iterable[Any]):
+        hash_family = randomhash.RandomHashFamily(count=1)
         observables = [0] * number_of_observables
         for word in stream:
             word_hash = hash_family.hash(word)

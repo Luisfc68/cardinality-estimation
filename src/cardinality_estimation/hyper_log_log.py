@@ -40,12 +40,12 @@ def create_hyper_log_log(
 ):
     if number_of_observables <= 0 or number_of_observables & (number_of_observables - 1) != 0:
         raise ValueError('Number of observables must be a power of 2')
-    hash_family = randomhash.RandomHashFamily(count=1) # hll only uses one hash function
     prefix_size = int(log2(number_of_observables))
     element_size = hash_length - prefix_size
     mask = (2**hash_length - 1)
     correction_constant = get_correction_constant(number_of_observables)
     def hll_instance(stream: Iterable[Any], verbose = False):
+        hash_family = randomhash.RandomHashFamily(count=1)  # hll only uses one hash function
         observables = [0] * number_of_observables
         for word in stream:
             word_hash = hash_family.hash(word)

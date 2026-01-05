@@ -10,8 +10,8 @@ def expected_kmv_error(k: int):
 
 def create_k_minimum_values(k: int, max_bits = 32):
     MAX_HASH = 2 ** max_bits - 1
-    hash_family = randomhash.RandomHashFamily(count=1)  # recordinality only uses one hash function
     def kmv_instance(stream: Iterable[Any]):
+        hash_family = randomhash.RandomHashFamily(count=1)
         minimum_records = set()
         # we'll use negative values to be able to work with heapq but to get the max value instead of the min
         heap = []

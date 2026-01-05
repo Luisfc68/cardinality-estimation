@@ -1,4 +1,4 @@
-from numpy import average
+from numpy import average, std
 
 class RunResult:
     def __init__(self, raw_data, result, expected_error):
@@ -16,4 +16,8 @@ class EstimatorResult:
         self.results = results
         self.estimator_name = estimator_name
         self.estimation = average(list(map(lambda x: x.result, results)))
-        self.expected_error = average(list(map(lambda x: x.expected_error, results)))
+        self.standard_error = std(list(map(lambda x: x.result, results)))
+        # the expected error depends on the observables and the stream size in some cases,
+        # so it doesn't vary per execution, we can either take the first or make the average,
+        # the number will be the same
+        self.expected_error = results[0].expected_error
